@@ -1,7 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
-
 const Dishes = require('../models/dishes');
 
 const dishRouter = express.Router();
@@ -57,9 +56,7 @@ dishRouter.route('/:dishId')
   res.end('POST operation not supported on /dishes/'+ req.params.dishId);
 })
 .put((req, res, next) => {
-    Dishes.findByIdAndUpdate(req.params.dishId, {
-        $set: req.body
-    }, { new: true })
+    Dishes.findByIdAndUpdate(req.params.dishId, { $set: req.body }, { new: true })
     .then((dish) => {
         res.statusCode = 200;
         res.setHeader('Content-Type', 'application/json');
